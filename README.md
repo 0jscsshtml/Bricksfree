@@ -22,3 +22,4 @@ Bricks Builder Plugin. Option page to enable/disable Bricksfree features. Import
     * If no active Pseudo Class and Global Class, all indicators show for ID styling.
     * If only Pseudo Class is active, all indicators show for active Pseudo Class styling.
     * If only Global Class is active, all indicators show for active Global Class styling.
+16) Highlight Nestable Elements at Structure Panel.
