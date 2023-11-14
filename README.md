@@ -25,3 +25,4 @@ Bricks Builder Plugin. Option page to enable/disable Bricksfree features. Import
 16) Highlight Nestable Elements at Structure Panel.
 17) Highlight All Parent Elements of current Active Element at Structure Panel.
 18) Lorem Ipsum generator for Basic Text and Rich Text Elements.
+19) Disable the outline border of the active element when styling Borders and Box-shadow
