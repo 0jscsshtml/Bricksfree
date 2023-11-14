@@ -18,7 +18,7 @@ Bricks Builder Plugin. Option page to enable/disable Bricksfree features. Import
 12) Change Builder Icon/Logo.
 13) Change Builder Preloader background color.
 14) Custom Builder Save Message.
-15) Breakpoint Indicators ( Style tab -> Groups ), Style indicators for Element Style Tab Groups Shortcuts, Pseudo Elements shortcuts and Media Queries Panel.
+15) Breakpoint Indicators ( Style tab -> Groups ), Style indicators for Element Style Tab Groups Shortcuts; Pseudo Elements shortcuts and Media Queries Panel.
     * If no active Pseudo Class and Global Class, all indicators show for ID styling.
     * If only Pseudo Class is active, all indicators show for active Pseudo Class styling.
     * If only Global Class is active, all indicators show for active Global Class styling.
