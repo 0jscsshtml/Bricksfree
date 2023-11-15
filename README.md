@@ -27,5 +27,7 @@ Bricks Builder Plugin. Option page to enable/disable Bricksfree features. Import
 18) Lorem Ipsum generator for Basic Text and Rich Text Elements.
 19) Disable the outline border of the active element when styling Borders and Box-shadow.
 20) Change Active Element outline color in Canvas.
-21) Lock Styles on element ID level.
+21) Lock Style Groups on element ID level.
     * Auto unlock if there is any Active Global Class, otherwise manually unlock to style on ID level.
+22) Locked Class Indicator
+    * Indicate Global Class Lock/Unlock Status on Global Class Popup Control and Element Classes List.
