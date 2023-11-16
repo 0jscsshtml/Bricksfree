@@ -31,3 +31,5 @@ Bricks Builder Plugin. Option page to enable/disable Bricksfree features. Import
     * Auto unlock if there is any Active Global Class, otherwise manually unlock to style on ID level.
 22) Locked Class Indicator
     * Indicate Global Class Lock/Unlock Status on Global Class Popup Control and Element Classes List.
+23) Class Preview on hover
+    * Hover any "Other Classes" at Global Class Popup Control to preview the Class styling
