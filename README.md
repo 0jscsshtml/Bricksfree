@@ -11,7 +11,7 @@ Bricks Builder Plugin. Option page to enable/disable Bricksfree features. Import
    * Right click element to open context menu, select "Hide element". Default Bricks action to unhide element.
 6) Increase builder’s inputs and Spacing Controls size.
 7) Auto-select Import Images in the Template popup.
-8) X-mode.
+8) X-mode. ( Builder & Preview )
 9) Pseudo-elements(:hover, :active, :focus, :before, :after) and Parent Element shortcuts.
 10) Element Style Tab Groups Shortcuts.
 11) New Elements shortcuts and Structure Panel Width Input on structure panel. ( Section/Block/Heading/Basic Text/Rich Text/Button/Icon/List/Code/Template/Shortcode )
