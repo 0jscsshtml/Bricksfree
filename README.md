@@ -33,3 +33,7 @@ Bricks Builder Plugin. Option page to enable/disable Bricksfree features. Import
     * Indicate Global Class Lock/Unlock Status on Global Class Popup Control and Element Classes List.
 23) Class Preview on hover
     * Hover any "Other Classes" at Global Class Popup Control to preview the Class styling
+24) Highlight all elements that share a same class && Class Counter
+    * Outline all elements in Canvas that have the same Class of the current active element.
+    * Outline all elements in Structure Panel that have the same Class of the current active element.
+    * Class Counter for the current Active Class at Element Classess Panel.
