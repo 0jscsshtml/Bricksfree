@@ -37,3 +37,4 @@ Bricks Builder Plugin. Option page to enable/disable Bricksfree features. Import
     * Outline all elements in Canvas that have the same Class of the current active element.
     * Outline all elements in Structure Panel that have the same Class of the current active element.
     * Class Counter for the current Active Class at Element Classess Panel.
+25) Reveal “Class Icons” on hover and focus.
