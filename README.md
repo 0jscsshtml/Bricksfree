@@ -1,7 +1,7 @@
 # Bricksfree
-Bricks Builder Plugin. Option page to enable/disable Bricksfree features. Import/export Option Page settings. Remove wp_options row created by Bricksfree after uninstall.
+* Bricks Builder Plugin. Option page to enable/disable Bricksfree features. Import/export Option Page settings. Remove wp_options row created by Bricksfree after uninstall.
 
-# Builder
+# Builder Tweaks (All assets JS & CSS loaded in Builder only )
 1) Preview Colors on hover ( Style Tab -> Typography/Background/Border/Box Shadow Color Control )
    * Hover over the color within the builder to preview it on the spot!
 2) Disable PIN Icon on the elements categories list.
