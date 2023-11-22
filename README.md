@@ -40,3 +40,7 @@
 25) Reveal “Class Icons” on hover and focus.
 26) Expand All Children Elements.
     * Click on any root parent wrapper/container to expand all direct childrens in Structure Panel.
+27) Tag Manager in Structure Panel.
+    * Html Tag Shortcut Control on each editable element st Structure Panel.
+    * light green Background for element wrapper html tag.
+    * Light orange background for element inner title html tag.
