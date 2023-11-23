@@ -41,6 +41,7 @@
 26) Expand All Children Elements.
     * Click on any root parent wrapper/container to expand all direct childrens in Structure Panel.
 27) Tag Manager in Structure Panel.
+    * Click outside of popup control to close, or select/input enter to close.
     * Html Tag Shortcut Control on each editable element st Structure Panel.
     * Light green background for element wrapper html tag.
     * Light orange background for element inner title html tag.
