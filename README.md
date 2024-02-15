@@ -33,3 +33,4 @@
 25) Basic text / Rich text / Heading converter
 26) Grid Guides
 27) Custom default settings for relevant elements( basic text - 'p', image - 'no-caption')
+28) Copy paste Conditions / Interactions to any elements on structure panel.
