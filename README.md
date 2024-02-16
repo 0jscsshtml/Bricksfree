@@ -34,3 +34,4 @@
 26) Grid Guides
 27) Custom default settings for relevant elements( basic text - 'p', image - 'no-caption')
 28) Copy paste Conditions / Interactions to any elements on structure panel.
+29) Clone active global class and add in to global classes list. Clone class name editable before clone.
