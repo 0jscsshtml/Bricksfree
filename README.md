@@ -4,6 +4,8 @@
 
 https://github.com/0jscsshtml/Bricksfree/assets/80338568/15879f4b-6c28-4037-ba88-8ab570ef2019
 
+https://github.com/0jscsshtml/Bricksfree/assets/80338568/0af0514c-fac0-4663-a2f9-c9f3ea3fd79e
+
 # Builder Tweaks (All assets JS & CSS loaded in Builder only )
 1) Preview Colors on hover ( support color control, except style group shape divider and gradient(may look into it later) );
 2) Disable PIN Icon on the elements categories list.
