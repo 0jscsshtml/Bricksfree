@@ -17,4 +17,19 @@ For this copy conditions feature, when you inspect the DOM, the conditions Node 
 Now you need a call button to trigger the copy action event and assume that you wanna put it next to the Conditions panel 'Close' button, you may need to use either setTimeout() or mutation.observe(maybe there is a better way that can access Vue component and add this button element to template instead of this method, still learning.) to wait for the DOM ready and recall the function to regenerate the Copy button whenever you toggle on element Conditions button. 
 (Tips: clone the 'Close' button, add the id 'xx-copy-conditions', replace inner svg(copy from any Bricks copy svg), replace data-balloon attribute to 'Copy Conditions', replace data-balloon-pos to 'bottom-right' and append this Copy button. This way the Bricks builder tooltips and button css will work for your new Copy button, no extra CSS.)
 
-Now button is ready, we already had event listener attached on ancestor node #bricks-panel-inner, now we concentrate on what thing we need to copy to clipboard. 
+Now Copy button is ready, we already had event listener attached on ancestor node #bricks-panel-inner, now we concentrate on what thing we need to copy to clipboard. Refer back to image 2, in VueGlobal, there are two method/constructor we needed, call $_getElementObject(arg1) and $_copyToClipboard(arg1, arg2). For $_getElementObject(arg1), arg1 is the active element id. Where to get active element id? In vueGlobal.$_state.activeId will return you active element id. The complete code to get the active element object and store to variable activeEleObj:-  
+
+const activeEleObj = vueGlobal.$_getElementObject(vueGlobal.$_state.activeId).settings._conditions;
+
+console.log(activeEleObj) you will get the object like below.(take note of each object id) 
+
+![1](https://github.com/0jscsshtml/Bricksfree/assets/80338568/5e03cfef-c273-483e-acb2-faa4a4455392)
+
+Now we had the object activeEleObj, then we use $_copyToClipboard(arg1, arg2) to copy to clipboard. arg1 is json stringify of activeEleObj, arg2 is just a string to show the message. In order for object validation when the time for paste action, I just take the first object id as validation key, you may do whatever you want as you deem fit. Code below:  
+
+validKey = activeEleObj[0]['id'];
+vueGlobal.$_copyToClipboard(JSON.stringify(activeEleObj), `Conditions Copied`);
+
+Now the object should be copied to clipboard already and you can test to paste it on any text editor.
+
+All the copy action is done now, now is the paste action turn. You need to create another button for paste action. Assume that you want to create it at Structure Panel Context Menu, since the Context Menu Node is rendered and remain in the DOM, so you just need to create one time the element and append it to Context Menu.
