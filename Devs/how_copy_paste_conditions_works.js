@@ -15,9 +15,9 @@
                   duplicateEle      = delEle.previousElementSibling,
                   pasteBtn          = delEle.cloneNode(true);
             
-            pasteBtn.id     = 'xx-paste-conditions';  
+            pasteBtn.id     		= 'xx-paste-conditions';  
             pasteBtn.classList.remove('delete');
-            pasteBtn.textContent = 'Paste Conditions';
+            pasteBtn.textContent 	= 'Paste Conditions';
             contextMenu.children[0].insertBefore(pasteBtn, duplicateEle);
 
             // create copy conditions button    
@@ -41,11 +41,11 @@
                     if ( targetEle.closest('li.conditions') && !targetEle.closest('li.conditions.active') ) {
                         setTimeout(() => {
                             const condCopyBtn = condCopyBtn();
-			    elementPanel.querySelector('.bricks-panel-controls .title-wrapper > .actions').append(condCopyBtn);
+							elementPanel.querySelector('.bricks-panel-controls .title-wrapper > .actions').append(condCopyBtn);
                         }, 235);
                     }  
 			
-		    // when click on copy conditions, call function to get current element conditions object and write to clipboard
+					// when click on copy conditions, call function to get current element conditions object and write to clipboard
                     if ( targetEle.closest('#xx-copy-conditions') ) {  
                         const activeEleObj = vueGlobal.$_getElementObject(vueGlobal.$_state.activeId)?.settings?._conditions;
 
