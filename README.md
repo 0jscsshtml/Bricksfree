@@ -10,8 +10,6 @@ Bricks is build on Vue, and Bricks provide/store the data globally with Vue glob
 
 With abit of time of element inspection, test and try how Bricks Vue method/constructor work, you can add any extra features/functions on Bricks. This AT 1:1 mockup inspired from the great God coder, just for learning purpose, will not release nor commercialize. Stay calm buddy, no one steal your hard work. With the god of mother coder ChatGPT, now is much more easy then few years ago. 
 
-# Discalimer: I don't own AT plugin.
-
 Now how all this underlying thing work?. Maybe I will put some tutorial on how all this works.
 
 
