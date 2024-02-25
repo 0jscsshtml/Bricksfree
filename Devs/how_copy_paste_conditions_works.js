@@ -31,7 +31,7 @@
                 copyBtn.children[0].children[0].innerHTML   = '<svg></svg>'; // copy bricks 'duplicate' svg and paste here
 
                 return copyBtn;
-            }
+            };
 
             function mainPanelEvents(event) {  
                 if (event.type === 'mousedown' && event.isTrusted) {  
@@ -43,8 +43,8 @@
                             const condCopyBtn = condCopyBtn();
 							elementPanel.querySelector('.bricks-panel-controls .title-wrapper > .actions').append(condCopyBtn);
                         }, 235);
-                    }
-
+                    }  
+			
 		    // when click on copy conditions, call function to get current element conditions object and write to clipboard
                     if ( targetEle.closest('#xx-copy-conditions') ) {  
                         const activeEleObj = vueGlobal.$_getElementObject(vueGlobal.$_state.activeId)?.settings?._conditions;
@@ -57,7 +57,7 @@
                         }
                     }  
                 }  
-            }
+            };
             
             function contextMenuEvents(event) {  
                 if ( event.type === 'mousedown' && event.isTrusted ) {		
@@ -85,10 +85,10 @@
                         })
                     }
                 }
-            }
+            };
 
             bricksPanel.addEventListener('mousedown', mainPanelEvents);
             contextMenu.addEventListener('mousedown', contextMenuEvents);
-        }
+        };
     })
 </script>
