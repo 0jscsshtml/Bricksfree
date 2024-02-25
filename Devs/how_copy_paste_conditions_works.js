@@ -41,7 +41,7 @@
                     if ( targetEle.closest('li.conditions') && !targetEle.closest('li.conditions.active') ) {
                         setTimeout(() => {
                             const condCopyBtn = condCopyBtn();
-							elementPanel.querySelector('.bricks-panel-controls .title-wrapper > .actions').append(condCopyBtn);
+			    elementPanel.querySelector('.bricks-panel-controls .title-wrapper > .actions').append(condCopyBtn);
                         }, 235);
                     }  
 			
