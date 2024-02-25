@@ -18,7 +18,7 @@ For this copy conditions feature, when you inspect in the DOM, the conditions No
 Now you need a call button to trigger the copy action event. Assume that you wanna put it next to the Conditions panel 'Close' button, you may need to use either setTimeout() or mutation.observe(maybe there is a better way that can access Vue component and add this button element to template instead of this method, still learning.) to wait for the DOM ready and recall the function to regenerate the Copy button whenever you toggle on element Conditions button. 
 (Tips: clone the 'Close' button, add the id 'xx-copy-conditions', replace inner svg(inspect element and copy the Bricks 'copy/duplicate' svg), replace data-balloon attribute to 'Copy Conditions', replace data-balloon-pos to 'bottom-right' and append this Copy button. This way your Copy Conditions button will inherit Bricks tooltips and button CSS.)
 
-Now Copy button is ready, we already had event listener attached on ancestor node #bricks-panel-inner, now we concentrate on what thing we need to copy to clipboard. Refer back to image 2, in VueGlobal, there are two method/constructor we needed, call $_getElementObject(arg1) and $_copyToClipboard(arg1, arg2). For $_getElementObject(arg1), arg1 is the active element id. Where to get active element id? In vueGlobal.$_state.activeId will return you the active element id. The complete code to get the active element object and store to variable activeEleObj:-  
+Now Copy button is ready, we already had event listener attached on ancestor node #bricks-panel-inner, now we concentrate on what thing we need to copy to clipboard. Refer back to image 2, in VueGlobal, there are two method/constructor we needed, call $_getElementObject(arg1) and $_copyToClipboard(arg1, arg2). For $_getElementObject(arg1), arg1 is the active element id. Where to get active element id? In vueGlobal.$_state.activeId, this will return you the active element id. The complete code to get the active element object and store to variable activeEleObj:-  
 
 const activeEleObj = vueGlobal.$_getElementObject(vueGlobal.$_state.activeId).settings._conditions;
 
@@ -28,13 +28,40 @@ console.log(activeEleObj) you will get the object like below.(take note of each 
 
 Now we had the object activeEleObj, then we use $_copyToClipboard(arg1, arg2) to copy to clipboard. arg1 is json stringify of activeEleObj, arg2 is just a string to show the message. In order for object validation when the time for paste action, I just take the first object id as validation key, you may do whatever you want as you deem fit. Code below:  
 
-validKey = activeEleObj[0]['id'];  
+validKey = activeEleObj[0][0]['id'];  
 vueGlobal.$_copyToClipboard(JSON.stringify(activeEleObj), "Conditions Copied");
 
 Now the object should be copied to clipboard already and you can test to paste it on any text editor.
 
 All the copy action is done now, now paste action turn. You need to create another button for paste action. Assume that you want to create it at Structure Panel Context Menu, since the Context Menu Node is rendered and remain in the DOM, you just need to create once and append it to Context Menu.
-(Tips: clone the 'Delete' list element from Context Menu, remove class name delete, add id, replace textContent to 'Paste Conditions', insert before Duplicate. This
+(Tips: clone the 'Delete' list element from Context Menu, remove class name delete, add id xx-paste-conditions, replace textContent to 'Paste Conditions', insert before Duplicate. This
 'Paste Conditions' list element will inherit from Builder CSS.)  
 
 Once 'Paste Condition' element created on Context Menu, you need JS to capture this element event. Attach mousedown event listener on Context Menu. 
+Now how to read the clipboard object? You will need another method/function call $_readFromClipboard() in vueGlobal. This method is a promise object, code to get clipboard data as below:
+
+vueGlobal.$_readFromClipboard().then((clipboardData) => {  
+  /*** code here ***/  
+});  
+
+We need to verify whether this is the object we needed before we paste on new element, create a variable to store the clipboard data.  
+const copiedObj = clipboardData;  
+if ( copiedObj[0][0]['id] === validKey ) {  
+  /*** code here ***/  
+  }  
+
+if validation passed, we can't just paste the object yet, every conditions object must has a unique id, so we need to change all the ids value before paste on the new element. We use the provided method $_generateId() in vueGlobal and iterate through the nested copiedObj id and change it.  
+
+const updatedArray = copiedObj.map(subArray =>  
+  subArray.map(obj => ({  
+    ...obj,  
+    id: vueGlobal.$_generateId()  
+    }))  
+    );  
+
+After changed the ids, now get the current element object and update it with this conditions object.  
+vueGlobal.$_state.activeElement.settings['_conditions'] = {};  
+vueGlobal.$_state.activeElement.settings['_conditions'] = updatedArray;  
+vueGlobal.$_showMessage('Conditions object pasted');
+
+Thats it. You can find the whole code in js file.
