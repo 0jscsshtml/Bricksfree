@@ -28,7 +28,8 @@
                 copyBtn.id                  = 'xx-copy-conditions';
                 copyBtn.dataset.balloon     = 'Copy conditions';
                 copyBtn.dataset.balloonPos  = 'bottom-right';
-                copyBtn.children[0].children[0].innerHTML   = '<svg></svg>'; // copy bricks 'duplicate' svg and paste here
+                copyBtn.children[0].innerHTML   = '';
+				copyBtn.children[0].innerHTML   = '<svg></svg>'; // copy bricks 'duplicate' svg and paste here
 
                 return copyBtn;
             };
