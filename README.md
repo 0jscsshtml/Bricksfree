@@ -8,10 +8,11 @@ https://github.com/0jscsshtml/Bricksfree/assets/80338568/0af0514c-fac0-4663-a2f9
 
 Bricks is build on Vue, and Bricks provide/store the data globally with Vue globalProperties. All additonal features/function you want to build mainly is getting and setting from this data, the rest is just JS/CSS/HTML for front end interactions. Anyone can build extra features on top of Bricks provided you know how to get access to the Bricks properties. Well, sadly, you hardly can found real devs will talk and share about this.(go and check in Bricks forum).
 
-With abit of time of element inspection, test and try how Bricks Vue method/constructor work, you no need to look into other people code to add any extra features/functions on Bricks. This AT 1:1 mockup inspired from the great God coder, yet a final product, yet to release nor commercialize, but already making huge chaos. Stay calm buddy, no one steal your hard work, no one own Vue/JS/CSS/HTML(except some one steal your code). Maybe you own your UI design, but you cant restrict people create same feature/function by JS that you don't own it(maybe different UI approach). with the god of mother coder ChatGPT, now is much more easy then few years ago. Discalimer: I don't own AT plugin.
+With abit of time of element inspection, test and try how Bricks Vue method/constructor work, you can add any extra features/functions on Bricks. This AT 1:1 mockup inspired from the great God coder, just for learning purpose, will not release nor commercialize. Stay calm buddy, no one steal your hard work. With the god of mother coder ChatGPT, now is much more easy then few years ago. 
 
-Now how all this underlying thing work?. I will start a tutorial to show you all how this work with 1st tutorial how to add copy paste element conditions
-in to Bricks Builder
+# Discalimer: I don't own AT plugin.
+
+Now how all this underlying thing work?. Maybe I will put some tutorial on how all this works.
 
 
 # Builder Tweaks (All assets JS & CSS loaded in Builder only )
