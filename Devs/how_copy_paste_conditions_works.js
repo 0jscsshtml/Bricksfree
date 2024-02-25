@@ -45,6 +45,7 @@
                         }, 235);
                     }
 
+		    // when click on copy conditions, call function to get current element conditions object and write to clipboard
                     if ( targetEle.closest('#xx-copy-conditions') ) {  
                         const activeEleObj = vueGlobal.$_getElementObject(vueGlobal.$_state.activeId)?.settings?._conditions;
 
