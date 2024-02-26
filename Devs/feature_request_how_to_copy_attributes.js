@@ -1,3 +1,10 @@
+<style>
+	#bf-copy-attribute.disable, #bf-paste-attribute.disable {
+		pointer-events: none;
+		opacity: 0.35;
+	}
+</style>
+
 <script>
     window.addEventListener("load", () => {
         // get Bricks vue properties
