@@ -46,3 +46,4 @@ Now how all this underlying thing work?. Maybe I will put some tutorial on how a
 27) Custom default settings for relevant elements( basic text - 'p', image - 'no-caption')
 28) Copy paste Conditions / Interactions to any elements on structure panel.
 29) Clone active global class and add in to global classes list. Clone class name editable before clone.
+30) Copy & paste element attributes.
