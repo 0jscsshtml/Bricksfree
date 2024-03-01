@@ -1,3 +1,5 @@
+https://github.com/0jscsshtml/Bricksfree/assets/80338568/597f8351-4d68-4e75-aaf5-bc69a4a0e610
+
 In Bricks Builder, Bricks properties are store in Vue GlobalProperties. When you inspect element in builder, there is a data attribute 'data-v-app' on brx-body class element.
 
 ![1](https://github.com/0jscsshtml/Bricksfree/assets/80338568/8a53a11e-5145-49fc-8aae-f7ca4bc4ef65)
