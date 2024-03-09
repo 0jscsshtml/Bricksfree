@@ -1,6 +1,6 @@
 <style>
     #bricks-structure[data-draggable-panel] {
-        padding-left: 10px;
+        padding-left: 10px
     }
     #xx-panel-resizable {
         position: fixed;
