@@ -221,3 +221,21 @@ add_action('wp_ajax_set_template_featured_image', 'set_template_featured_image')
         }
     })
 </script>  
+
+<style>
+    #bricks-popup.templates .bricks-layout-item-inner {
+	min-height: 280px;
+	height: 100%;
+    }
+
+    #bricks-popup.templates img {
+        width: 100%;
+        object-fit: cover;
+        object-position: top;
+        height: 280px;
+        transition: 2s all ease;
+    }
+    #bricks-popup.templates .bricks-layout-item-inner:hover img {
+        object-position: bottom;
+    }
+</style>
