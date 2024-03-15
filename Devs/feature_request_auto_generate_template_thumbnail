@@ -1,0 +1,223 @@
+/***  put code below in function.php ***/
+
+// enqueue scripts in builder
+function xx_enqueue_scripts() {
+	
+    // Enqueue script in builder only
+    if ( bricks_is_builder_main() ) {
+	
+        // Enqueue html2canvas.js script, either host locally or from cdn
+        wp_enqueue_script('html2canvas', 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js', array(), '', true);
+
+        // Enqueue js script
+        wp_enqueue_script('xx_builder_ajax', get_template_directory_uri() . '/js/xx_builder_ajax.js', array('jquery', 'html2canvas'), '', true);
+
+        // Localize script
+        wp_localize_script('xx_builder_ajax', 'xx_builder_ajax', array(
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce('xx-nonce'),
+        ));
+
+    }
+}
+add_action('wp_enqueue_scripts', 'xx_enqueue_scripts');
+
+// Process AJAX call
+function set_template_featured_image() {	
+    // verify nonce	
+    if ( !check_ajax_referer( 'xx-nonce', 'nonce', false ) ) {
+        wp_send_json_error( array( 'message' => 'Invalid nonce' ) );
+    }
+
+    // get screenshot image
+    $img_data = $_POST['imgData'];
+    $img_data = base64_decode($img_data);
+
+    // Retrieve the latest post of the custom post type('bricks_template')
+    $latest_post = get_posts(array(
+        'post_type'      => 'bricks_template',
+        'posts_per_page' => 1,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+    ));
+
+    // Check if posts are found
+    if (!empty($latest_post)) {
+	        
+        // Get the ID of the latest post
+        $latest_post_id = $latest_post[0]->ID;
+        
+        // just a simple validation check, you can use your own logic
+        $latest_post_date = strtotime($latest_post[0]->post_date);
+        $current_time = time();
+        
+        // Calculate the difference in seconds
+        $time_difference = $current_time - $latest_post_date;
+        
+        if ($time_difference < 60) {
+			
+            // upload image to media library
+            $file = wp_upload_bits('thumbnail.jpg', null, $img_data);
+        
+            // Check if the file was successfully created
+            if ($file['error'] == '') {
+                $attachment = array(
+                    'post_mime_type'    => 'image/jpeg',
+                    'post_parent'       => $latest_post_id,
+                    'post_title'        => 'Thumbnail-' . $latest_post_id,
+                    'post_content'      => '',
+                    'post_status'       => 'inherit',
+                );
+                
+                $attachment_id = wp_insert_attachment($attachment, $file['file'], $latest_post_id);
+                $attachment_url = wp_get_attachment_url( $attachment_id );
+                update_post_meta($latest_post_id, '_thumbnail_id', $attachment_id);
+                    
+                // Send success response
+                wp_send_json_success( array(
+                    'message' => 'Featured image set successfully!',
+                    'attachment_url' => $attachment_url
+                ));
+            } else {
+                wp_send_json_error( array(
+                    'message' => 'Oops, set thumbnail failed.',
+                ));
+            }
+        
+        } else {
+            wp_send_json_error( array(
+                'message' => 'Oops, set thumbnail failed.',
+            ));
+        }
+    }
+}
+add_action('wp_ajax_set_template_featured_image', 'set_template_featured_image');
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*** this is xx_builder_ajax.js script ***/
+<script>
+    window.addEventListener("load", () => {
+        // get Bricks vue properties
+        var vueGlobal   = document.querySelector('.brx-body').__vue_app__.config.globalProperties;
+
+        // if user has full access to Builder
+        if ( vueGlobal.$_state.fullAccess ) {
+        
+            // get iframe, Structure Panel Context Menu and Preview Panel element
+            const   iframe            = document.getElementById('bricks-builder-iframe'),
+                    iframeDocument    = iframe.contentDocument || iframe.contentWindow.document,
+                    contextMenu       = document.querySelector('.brx-body.main > #bricks-builder-context-menu'),
+                    previewPanel      = document.getElementById('bricks-preview');
+
+            // observer options
+            const domObserverOption = { attributes: true, attributeFilter: ["class"], childList: true, subtree: true };
+
+            // observer state
+            var previewPanelObserver = false;   
+			
+            // AJAX call
+            function setFeatureImage(popup) { 
+                const   activeId        = vueGlobal.$_state.activeId,
+                        templateWrapper = popup.querySelector('main > ul.bricks-layout-wrapper');
+                
+                if ( activeId !== undefined ) {			
+                    function templateSaveEvent() {
+                        setTimeout(() => {
+                            const targetScreenshot = iframeDocument.getElementById(`brxe-${activeId}`);
+                                    
+                            html2canvas(targetScreenshot).then(function(canvas) {
+                                const   dataUrl = canvas.toDataURL('image/png'),
+                                        imgData = dataUrl.replace(/^data:image\/(png|jpg);base64,/, '');
+                                        
+                                // AJAX request to WordPress admin-ajax.php
+                                jQuery.ajax({
+                                    type: 'POST',
+                                    url: xx_builder_ajax.ajax_url,
+                                    data: {
+                                        action: 'set_template_featured_image',
+                                        nonce : xx_builder_ajax.nonce,
+                                        imgData: imgData,
+                                    },
+                                    success: function(response) {
+                                        // Check if the response is successful
+                                        if (response.success) {
+                                            vueGlobal.$_showMessage(response.data.message);
+
+                                            const thumbnailUrl = response.data.attachment_url;
+                                            let img = document.createElement('img');
+                                            img.src = thumbnailUrl;
+                                            templateWrapper.children[0].children[0].prepend(img);
+                                        } else {
+                                            vueGlobal.$_showMessage(response.data.message);
+                                        }
+                                    },
+                                });
+                            });
+                        }, 100);	
+                    };
+                            
+                    const saveBtn = popup.querySelector('.action-wrapper.save > button');			
+                    saveBtn.addEventListener('click', templateSaveEvent);
+                }
+            }
+            
+            // mutation observer
+            var domObserver = new MutationObserver((mutations_list) => { 		
+                mutations_list.forEach((mutation) => {	
+                    const templatePopup	= Array.from(mutation.addedNodes).filter(({classList}) => classList && classList.contains("templates"));
+
+                    // is template popup
+                    if ( templatePopup.length && templatePopup[0].id === 'bricks-popup' ) {
+                        setFeatureImage(templatePopup[0]);
+                    };
+
+                });
+
+                // disconnect observer
+                setTimeout(() => {
+                    domObserver.disconnect();
+                    previewPanelObserver   = false;			
+                }, 300);
+            });
+
+            // initialize mutation observer and set observer state
+            function panelMutation(panel, observerState) {		
+                if (!observerState) {
+                    domObserver.observe(panel, domObserverOption);				
+                    observerState = true;				
+                }
+                return observerState;
+            }
+
+            // is Preview Panel and call mutation observer
+            function previewPanelMutation() {
+                previewPanelObserver = panelMutation(previewPanel, previewPanelObserver);
+            }
+
+            function contextMenuEvents(e) {
+                const targetEle = e.target;
+                if ( e.type === 'mousedown' && e.isTrusted === true ) {	
+
+                    // event on "Save as template", call mutation observer
+                    if ( targetEle.classList.contains('save') && targetEle.classList.contains('sep') ) {
+                        previewPanelMutation();
+                    }
+
+                }
+            }
+
+            contextMenu.addEventListener('mousedown', contextMenuEvents);
+        }
+    })
+</script>  
