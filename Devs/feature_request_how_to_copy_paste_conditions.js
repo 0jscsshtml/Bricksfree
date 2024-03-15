@@ -41,8 +41,8 @@
                     // when toggle on conditions, call function to create button and append
                     if ( targetEle.closest('li.conditions') && !targetEle.closest('li.conditions.active') ) {
                         setTimeout(() => {
-                            const condCopyBtn = condCopyBtn();
-							elementPanel.querySelector('.bricks-panel-controls .title-wrapper > .actions').append(condCopyBtn);
+                            const condCopyBtnEle = condCopyBtn();
+							elementPanel.querySelector('.bricks-panel-controls .title-wrapper > .actions').append(condCopyBtnEle);
                         }, 235);
                     }  
 			
