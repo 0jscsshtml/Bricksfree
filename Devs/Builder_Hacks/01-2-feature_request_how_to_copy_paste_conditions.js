@@ -1,3 +1,10 @@
+<style>
+    #xx-paste-conditions.disable {
+        pointer-events: none;
+        opacity: 0.35;
+    }
+</style>
+
 <script>
     window.addEventListener("load", () => {
         // get Bricks vue properties
@@ -8,17 +15,20 @@
             var validKey            = '';
             const bricksPanel       = document.getElementById('bricks-panel-inner'), 
                   elementPanel      = document.getElementById('bricks-panel-element'),
+                  structurePanel	= document.getElementById('bricks-structure'),
                   contextMenu       = document.querySelector('.brx-body > #bricks-builder-context-menu');
 
-            // create 'Paste Conditions' element on Context Menu
-            const delEle            = contextMenu.querySelector('li.delete'),
-                  duplicateEle      = delEle.previousElementSibling,
-                  pasteBtn          = delEle.cloneNode(true);
+            // create 'Paste Conditions' button on Context Menu
+            const   getIdBtn		= contextMenu.children[0].querySelector('span[data-balloon^="#brxe"]'),
+			        getPasteEle 	= contextMenu.children[0].querySelector('li.sep > span.shortcut'),
+                    pasteBtn        = getIdBtn.cloneNode();
             
-            pasteBtn.id     		= 'xx-paste-conditions';  
-            pasteBtn.classList.remove('delete');
-            pasteBtn.textContent 	= 'Paste Conditions';
-            contextMenu.children[0].insertBefore(pasteBtn, duplicateEle);
+            pasteBtn.id     		     = 'xx-paste-conditions';  
+            pasteBtn.dataset.balloon     = 'Paste conditions';
+            pasteBtn.dataset.balloonPos  = 'top';
+            pasteBtn.classList.add('disable');
+            pasteBtn.textContent = 'C';
+            getPasteEle.parentElement.insertBefore(pasteBtn, getPasteEle);
 
             // create copy conditions button    
             function condCopyBtn() {
@@ -88,8 +98,28 @@
                 }
             };
 
+            function structurePanelEvents(event) {  
+                if ( event.type === 'contextmenu' && event.isTrusted ) {	
+                    setTimeout(() => {	
+					    const targetId = vueGlobal.$_state.showContextMenu;
+					    if ( targetId ) {
+						    contextMenuAction(targetId);	
+					    }
+				    }, 2);
+				
+				    function contextMenuAction(targetId) {	
+					    if ( validKey === '' ) {
+						    document.getElementById('xx-paste-conditions').classList.add('disable');
+					    } else {
+						    document.getElementById('xx-paste-conditions').classList.remove('disable');
+					    }
+                    }   
+                }
+            }
+
             bricksPanel.addEventListener('mousedown', mainPanelEvents);
             contextMenu.addEventListener('mousedown', contextMenuEvents);
+            structurePanel.addEventListener('contextmenu', structurePanelEvents);
         };
     })
 </script>
