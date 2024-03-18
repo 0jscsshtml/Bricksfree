@@ -34,26 +34,29 @@
 			const pasteAttrBtn = createAttrBtn('Paste Attribute', 'xx-paste-attribute');
 			getPasteEle.parentElement.insertBefore(pasteAttrBtn, getPasteEle);
 
+            // structure panel context menu open event
             function structurePanelEvents() {
-				setTimeout(() => {	
-					const targetId = vueGlobal.$_state.showContextMenu;
-					if ( targetId ) {
-						contextMenuAction(targetId);	
-					}
-				}, 2);
+                if ( event.type === 'contextmenu' && event.isTrusted === true ) {
+				    setTimeout(() => {	
+					    const targetId = vueGlobal.$_state.showContextMenu;
+					    if ( targetId ) {
+						    contextMenuAction(targetId);	
+					    }
+				    }, 2);
 				
-				function contextMenuAction(targetId) {	
-					if ( !vueGlobal.$_state.activeElement.settings.hasOwnProperty('_attributes') ) {
-						document.getElementById('xx-copy-attribute').classList.add('disable');
-					} else {
-						document.getElementById('xx-copy-attribute').classList.remove('disable');
-					}
-					if ( validKey === '' ) {
-						document.getElementById('xx-paste-attribute').classList.add('disable');
-					} else {
-						document.getElementById('xx-paste-attribute').classList.remove('disable');
-					}
-				}
+				    function contextMenuAction(targetId) {	
+					    if ( !vueGlobal.$_state.activeElement.settings.hasOwnProperty('_attributes') ) {
+						    document.getElementById('xx-copy-attribute').classList.add('disable');
+					    } else {
+						    document.getElementById('xx-copy-attribute').classList.remove('disable');
+					    }
+					    if ( validKey === '' ) {
+						    document.getElementById('xx-paste-attribute').classList.add('disable');
+					    } else {
+						    document.getElementById('xx-paste-attribute').classList.remove('disable');
+					    }
+                    }    
+                }
 			}
 			
 			function contextMenuEvents(event) {  
