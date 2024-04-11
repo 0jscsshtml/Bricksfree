@@ -39,3 +39,18 @@ https://github.com/0jscsshtml/Bricksfree/assets/80338568/bfd39242-fee3-47c9-af7a
   * Bricks filter hook auto insert visibility toggle buttons inside form password field wrapper. (Visible in frontend only).
   * Auto assign basic styling for visibility toggle buttons at Form customCSS. Make changes here if you feel deem fit.
   * Disable in Options group auto delete styling for visibility toggle buttons at Form customCSS.
+
+# Datepicker
+ * Enable Monday as First Week Day at Options group, apply on all datepicker fields.
+ * Enable datepicker options at Options group, extra flatpicker control on datepicker fields.
+   * Disable calendar.
+   * Today as start date, Custom start date and end date, limit dates range for selection.
+   * Start date base on another datepicker field selected date.
+   * Disable on weekend, custom disable dates in multiple or range.
+   * Set default hour and minutes.
+
+# Redirect with field label:value as url parameters
+  * Enable in Options group.
+  * Extra control on certain form fields type to attach as url parameters.
+  * Auto assign custom actions and remove Bricks default redirect action, use the custom redirect action instead.
+  * Toggle off in Options group auto remove custom actions.
