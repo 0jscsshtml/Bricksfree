@@ -56,6 +56,7 @@ https://github.com/0jscsshtml/Bricksfree/assets/80338568/bfd39242-fee3-47c9-af7a
    * Start date base on another datepicker field selected date.
    * Disable on weekend, custom disable dates in multiple or range.
    * Set default hour and minutes.
+   * Date selection mode single/multiple/range
 
 # Redirect with field label:value as url parameters
   * Enable in Options group.
